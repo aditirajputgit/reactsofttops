@@ -15,12 +15,16 @@ import {
 
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
+import { isDisabled } from "@testing-library/user-event/dist/utils";
 import { Component } from "react";
+import { isTemplateHead } from "typescript";
 
 interface S {
-  todoArray: Array<String>;
+  todoArray: Array<string>;
   todoItem: string;
   selectItem: string;
+  isDisable: boolean;
+  updateValue: string;
 }
 
 interface Props {}
@@ -32,6 +36,8 @@ class TodoList extends Component<Props, S> {
       todoArray: [],
       todoItem: "",
       selectItem: "",
+      isDisable:false,
+      updateValue: "",
     };
   }
 
@@ -55,20 +61,34 @@ class TodoList extends Component<Props, S> {
     console.log(todoArray);
   };
 
+  onEditButton = (item: string) => {
+    console.log("editted");
+    this.setState({ isDisable: !this.state.isDisable, updateValue: item });
+    console.log(this.state.isDisable);
+  };
+
   onAddingTodoItem = () => {
     const { todoArray } = this.state;
     return todoArray.map((item, index) => {
       return (
         <>
           <TodoItemstyle key={index}>
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Checkbox name="checkedA" />}
               label={item}
               value={item}
+            /> */}
+            <input
+              type="text"
+              value={this.state.isDisable ? this.state.updateValue : item}
+              disabled={this.state.isDisable}
+              onChange={(e) => {
+                this.setState({ updateValue: e.target.value });
+              }}
             />
             <Box>
               <DeleteIcon onClick={() => this.onDeletingItem(index)} />
-              <EditIcon />
+              <EditIcon onClick={() => this.onEditButton(item)} />
             </Box>
           </TodoItemstyle>
         </>
