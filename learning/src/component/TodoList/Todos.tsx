@@ -1,28 +1,18 @@
 import { Box, Button, OutlinedInput, Typography } from "@material-ui/core";
 import { styled } from "@material-ui/styles";
 import React, { Component } from "react";
-<<<<<<< HEAD
-import TodoLists from "../component/TodoList";
-=======
-import TodoLists from "../components/TodoLists";
->>>>>>> d667cdfbd8285dea0609fa50f691543ea486f1d0
+import TodoLists from "./TodoList";
 export interface Todos {
   id: number;
   todos: string;
   isDone: boolean;
-<<<<<<< HEAD
   isEdit: boolean;
-=======
->>>>>>> d667cdfbd8285dea0609fa50f691543ea486f1d0
 }
 
 interface S {
   setTodo: string;
   setTodoArray: Todos[];
-<<<<<<< HEAD
   editTodoText: string;
-=======
->>>>>>> d667cdfbd8285dea0609fa50f691543ea486f1d0
 }
 
 interface Props {}
@@ -33,7 +23,6 @@ export default class Todo extends Component<Props, S> {
     this.state = {
       setTodo: "",
       setTodoArray: [],
-<<<<<<< HEAD
       editTodoText: "",
     };
   }
@@ -75,16 +64,10 @@ export default class Todo extends Component<Props, S> {
     this.setState({ setTodoArray: updatedTodoArray });
   };
 
-=======
-    };
-  }
-
->>>>>>> d667cdfbd8285dea0609fa50f691543ea486f1d0
   onClickAddTodo = (event: React.FormEvent) => {
     event.preventDefault();
     const { setTodo, setTodoArray } = this.state;
     if (setTodo) {
-<<<<<<< HEAD
       const newTodo: Todos = {
         id: Date.now(),
         todos: setTodo,
@@ -98,31 +81,18 @@ export default class Todo extends Component<Props, S> {
         }
       );
     }
-=======
-      const newTodo : Todos = {
-        id: Date.now(),
-        todos: setTodo,
-        isDone: false,
-      }
-      this.setState({ setTodoArray: [...setTodoArray,newTodo ], setTodo: "" });
-    }
-    console.log(this.state.setTodoArray)
->>>>>>> d667cdfbd8285dea0609fa50f691543ea486f1d0
   };
 
   onChangingInputValue = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ setTodo: event.target.value });
   };
 
-<<<<<<< HEAD
   updateTodoHandler = (updatedValues:Array<Todos>) => {
     this.setState({
         setTodoArray: updatedValues
     })
   }
 
-=======
->>>>>>> d667cdfbd8285dea0609fa50f691543ea486f1d0
   render() {
     return (
       <TodoStyled>
@@ -145,7 +115,6 @@ export default class Todo extends Component<Props, S> {
           </Box>
         </form>
         <Box>
-<<<<<<< HEAD
           <TodoLists
             setTodoArray={this.state.setTodoArray}
             editTodoText={this.state.editTodoText}
@@ -154,14 +123,6 @@ export default class Todo extends Component<Props, S> {
             onDeletingButton={this.onDeletingButton}
             updateTodoHandler = {this.updateTodoHandler}
           />
-=======
-        
-            <TodoLists
-              setTodoArray={this.state.setTodoArray}
-              setTodo={this.state.setTodo}
-            />
-          
->>>>>>> d667cdfbd8285dea0609fa50f691543ea486f1d0
         </Box>
       </TodoStyled>
     );
@@ -218,11 +179,7 @@ const TodoStyled = styled(Box)({
       boxShadow: "0 0 10px 1000px rgba(0,0,0)",
       outline: "none",
     },
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> d667cdfbd8285dea0609fa50f691543ea486f1d0
     "& .input_submit": {
       position: "absolute",
       width: "50px",

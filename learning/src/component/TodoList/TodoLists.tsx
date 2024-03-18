@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Todos } from "./Todo"; // Import the Todos interface
+import { Todos } from "./Todos";
 import { Box, Typography } from "@material-ui/core";
 import { styled } from "@material-ui/styles";
 import EditIcon from "@material-ui/icons/Edit";
@@ -12,7 +12,7 @@ interface Props {
 }
 
 interface S {
-    setTodoArray: Todos[];
+  setTodoArray: Todos[];
 }
 
 export default class TodoLists extends Component<Props, S> {
@@ -27,11 +27,11 @@ export default class TodoLists extends Component<Props, S> {
     console.log("Editing");
   };
 
-  onDeletingButton = (id:number) => {
-    const {setTodoArray} = this.state
-    this.setState({setTodoArray : setTodoArray.splice(1,id)})
-    console.log(this.state.setTodoArray)
-};
+  onDeletingButton = (id: number) => {
+    const { setTodoArray } = this.state;
+    this.setState({ setTodoArray: setTodoArray.splice(1, id) });
+    console.log(this.state.setTodoArray);
+  };
 
   onDoneIconButton = (id: number) => {
     const updatedTodoArray = this.props.setTodoArray.map((item) => {
@@ -41,14 +41,13 @@ export default class TodoLists extends Component<Props, S> {
           isDone: false,
         };
       }
-      console.log(item)
+      console.log(item);
       return item;
-
     });
 
     this.setState({ setTodoArray: updatedTodoArray });
   };
-  forOneItemCart = (item: Todos,key:number) => {
+  forOneItemCart = (item: Todos, key: number) => {
     return (
       <AddTodo key={item.id}>
         <form className="formInput">
@@ -92,8 +91,8 @@ export default class TodoLists extends Component<Props, S> {
     return (
       <>
         <TodoList>
-          {this.props.setTodoArray.map((item,key) => {
-            return this.forOneItemCart(item,key);
+          {this.props.setTodoArray.map((item, key) => {
+            return this.forOneItemCart(item, key);
           })}
         </TodoList>
       </>
@@ -104,10 +103,10 @@ export default class TodoLists extends Component<Props, S> {
 const TodoList = styled(Box)({
   margin: "3rem",
   display: "flex",
-  width:"90%",
-  justifyContent:"center",
-  alignItems:"center",
-  flexWrap:"wrap",
+  width: "90%",
+  justifyContent: "center",
+  alignItems: "center",
+  flexWrap: "wrap",
 });
 
 const AddTodo = styled(Box)({
@@ -126,12 +125,12 @@ const AddTodo = styled(Box)({
   },
   "& .formInput": {
     display: "flex",
-    width:"100%",
-    justifyContent:"space-between"
+    width: "100%",
+    justifyContent: "space-between",
   },
-  "& .icon":{
-    marginLeft:"10px",
-    fontSize:"25px",
-    cursor:"pointer"
-  }
+  "& .icon": {
+    marginLeft: "10px",
+    fontSize: "25px",
+    cursor: "pointer",
+  },
 });
