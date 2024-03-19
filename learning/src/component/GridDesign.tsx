@@ -2,7 +2,7 @@ import { Box, Typography } from "@material-ui/core";
 import { styled } from "@material-ui/styles";
 import React, { Component } from "react";
 
-export default class Design extends Component {
+export default class GridDesign extends Component {
   render() {
     return (
       <>
