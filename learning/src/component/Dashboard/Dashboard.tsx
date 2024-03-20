@@ -22,6 +22,8 @@ import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import CallReceivedOutlinedIcon from "@material-ui/icons/CallReceivedOutlined";
 import CallMadeOutlinedIcon from "@material-ui/icons/CallMadeOutlined";
 import DashboardOutlinedIcon from "@material-ui/icons/DashboardOutlined";
+import { ProductDetails } from "./Product";
+import Product from "./Product";
 
 interface Historytype {
   imgSrc: any;
@@ -82,9 +84,18 @@ const YesterDay = [
     time: "9.45Am",
   },
 ];
+interface ProductType {
+  id: number;
+  name: string;
+  price: number;
+  isAdded: boolean;
+  imgsrc: string;
+}
 interface S {
   dashboardState: Array<Historytype>;
   yesterDayState: Array<Historytype>;
+  productData: Array<ProductType>;
+  count: number;
 }
 export default class Dashboard extends Component<{}, S> {
   constructor(props: {}) {
@@ -92,8 +103,17 @@ export default class Dashboard extends Component<{}, S> {
     this.state = {
       dashboardState: History,
       yesterDayState: YesterDay,
+      productData: ProductDetails,
+      count: 0,
     };
   }
+
+  onClickAddToCart = () => {
+    this.setState((prevState) => ({
+      count: prevState.count + 1,
+    }));
+  };
+
   fromBankDetails = (item: Historytype) => {
     return (
       <>
@@ -433,39 +453,48 @@ export default class Dashboard extends Component<{}, S> {
   };
   render() {
     return (
-      <DashboardBox>
-        <Box className="dashboardInnerBox">
-          <Box className="dashboardNavBar">
-            <Box className="dashboardNavBars">
-              <Box className="logo">Gf</Box>
-              <Typography className="navbarMenu"> Dashboard</Typography>
-              <Typography className="navbarMenu">Payments</Typography>
-              <Typography className="navbarMenu">Analysis</Typography>
-              <Typography className="navbarMenu">Cards</Typography>
-              <Typography className="navbarMenu">History</Typography>
-              <Typography className="navbarMenu">Services</Typography>
-              <Typography className="navbarMenu">Help</Typography>
+      <>
+        <DashboardBox>
+          <Box className="dashboardInnerBox">
+            <Box className="dashboardNavBar">
+              <Box className="dashboardNavBars">
+                <Box className="logo">Gf</Box>
+                <Typography className="navbarMenu"> Dashboard</Typography>
+                <Typography className="navbarMenu">Payments</Typography>
+                <Typography className="navbarMenu">Analysis</Typography>
+                <Typography className="navbarMenu">Cards</Typography>
+                <Typography className="navbarMenu">History</Typography>
+                <Typography className="navbarMenu">Services</Typography>
+                <Typography className="navbarMenu">Help</Typography>
+              </Box>
+              <Box className="dashboardSettingAndNotification">
+                <SettingsOutlinedIcon />
+                <Badge color="secondary" badgeContent={this.state.count}>
+                  <NotificationsOutlinedIcon />
+                </Badge>
+                <Typography className="navbarname">Mathieu</Typography>
+                <Avatar
+                  alt="Remy Sharp"
+                  src="https://img.freepik.com/free-photo/side-view-smiling-man-posing_23-2148364859.jpg?t=st=1710843149~exp=1710846749~hmac=0e80226d3d56555291e46aa48bac1b9bd51d131a22e92813615c98cc5a865530&w=740"
+                />
+              </Box>
             </Box>
-            <Box className="dashboardSettingAndNotification">
-              <SettingsOutlinedIcon />
-              <Badge color="secondary" variant="dot">
-                <NotificationsOutlinedIcon />
-              </Badge>
-              <Typography className="navbarname">Mathieu</Typography>
-              <Avatar
-                alt="Remy Sharp"
-                src="https://img.freepik.com/free-photo/side-view-smiling-man-posing_23-2148364859.jpg?t=st=1710843149~exp=1710846749~hmac=0e80226d3d56555291e46aa48bac1b9bd51d131a22e92813615c98cc5a865530&w=740"
-              />
-            </Box>
-          </Box>
-          <Box className="bankDetailsAndHistory">
-            <Box className="bankDetailsLeft">{this.bankDetailsLeft()}</Box>
-            <Box className="bankDetailsCenter"> {this.bankDetailsCenter()}</Box>
+            <Box className="bankDetailsAndHistory">
+              <Box className="bankDetailsLeft">{this.bankDetailsLeft()}</Box>
+              <Box className="bankDetailsCenter">
+                {" "}
+                {this.bankDetailsCenter()}
+              </Box>
 
-            <Box className="bankDetailsRight">{this.bankDetailsRight()}</Box>
+              <Box className="bankDetailsRight">{this.bankDetailsRight()}</Box>
+            </Box>
           </Box>
-        </Box>
-      </DashboardBox>
+        </DashboardBox>
+        <Product
+          onClickAddToCart={this.onClickAddToCart}
+          productDetails={this.state.productData}
+        />
+      </>
     );
   }
 }

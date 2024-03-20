@@ -1,4 +1,6 @@
-import "./App.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Dashboard2 from "./component/Dashboard2";
 //import MyButton from "./component/click";
 //import Student from "./component/Student";
 //import Todo from "./component/TodoList/Todo";
